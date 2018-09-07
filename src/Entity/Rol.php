@@ -3,25 +3,30 @@
  * Created by PhpStorm.
  * User: David
  * Date: 7/9/18
- * Time: 9:54 AM
+ * Time: 2:37 PM
  */
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="usuario")
+ * @ORM\Table(name="rol")
  */
-class Usuario{
+class Rol{
 
     public function __construct(){
+
+        $this -> usuarios = new ArrayCollection();
+
     }
 
     /**
      * @ORM\Column(type="integer")
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -34,13 +39,12 @@ class Usuario{
     /**
      * @ORM\Column(type="string", length=10)
      */
-    private $telefono;
+    private $nemonico;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Rol", inversedBy="usuarios")
-     * @ORM\JoinColumn(name="id_rol", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Usuario", mappedBy="rol")
      */
-    private $rol;
+    private $usuarios;
 
     /**
      * @return mixed
@@ -48,6 +52,14 @@ class Usuario{
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -69,33 +81,35 @@ class Usuario{
     /**
      * @return mixed
      */
-    public function getTelefono()
+    public function getNemonico()
     {
-        return $this->telefono;
+        return $this->nemonico;
     }
 
     /**
-     * @param mixed $telefono
+     * @param mixed $nemonico
      */
-    public function setTelefono($telefono)
+    public function setNemonico($nemonico)
     {
-        $this->telefono = $telefono;
+        $this->nemonico = $nemonico;
     }
 
     /**
      * @return mixed
      */
-    public function getRol()
+    public function getUsuarios()
     {
-        return $this->rol;
+        return $this->usuarios;
     }
 
     /**
-     * @param mixed $rol
+     * @param mixed $usuarios
      */
-    public function setRol($rol)
+    public function setUsuarios($usuarios)
     {
-        $this->rol = $rol;
+        $this->usuarios = $usuarios;
     }
+
+
 
 }

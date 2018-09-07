@@ -26,10 +26,22 @@ class Usuario extends AbstractController {
 
 
         $usuarios = $em -> getRepository(\App\Entity\Usuario::class) ->findAll();
-
         foreach ($usuarios as $usuario){
             $logger ->info('- > '.$usuario -> getNombre());
         }
+
+        //DQL
+        $logger -> info('Result: ');
+        $query = $em -> createQuery("select u from App:Usuario u where u.nombre = :nombre") -> setParameter('nombre','David');
+        $usuariosDql = $query -> getResult();
+        foreach ($usuariosDql as $usuarioDql){
+            $logger ->info('- > '.$usuarioDql -> getNombre());
+        }
+
+        $logger -> info('Single Result: ');
+        $usuarioDql = $query -> getSingleResult();
+        $logger -> info('- > '.$usuarioDql -> getId().' - '.$usuarioDql -> getNombre().' - '.$usuarioDql -> getTelefono().' - '.$usuarioDql -> getRol() -> getNemonico() );
+
         return new Response('La respuesta esta en consola ...!');
 
     }
