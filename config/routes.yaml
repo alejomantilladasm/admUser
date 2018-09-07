@@ -4,3 +4,19 @@
 #index:
 #    path: /
 #    defaults: { _controller: 'App\Controller\DefaultController::index' }
+
+home:
+    path: /
+    defaults: { _controller: 'App\Controller\Home::index' }
+
+crear_usuario:
+    path: /usuario/crear
+    defaults: { _controller: 'App\Controller\Usuario::crear' }
+
+editar_usuario:
+    path: /usuario/editar/{id}
+    defaults: { _controller: 'App\Controller\Usuario::editar' }
+
+eliminar_usuario:
+    path: /usuario/eliminar/{id}
+    defaults: { _controller: 'App\Controller\Usuario::eliminar' }
