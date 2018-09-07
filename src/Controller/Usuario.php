@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Rol;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,6 +24,14 @@ class Usuario extends AbstractController {
      */
     public function index(LoggerInterface $logger, EntityManagerInterface $em){
         $logger -> info('Index Usuario ... !');
+
+
+
+        $logger -> info("::Usuarios ADMIN::");
+        $rol = $em ->getRepository(Rol::class) ->find(1);
+        foreach ($rol -> getUsuarios() as $usuario){
+            $logger ->info('- > '.$usuario -> getNombre());
+        }
 
 
         $usuarios = $em -> getRepository(\App\Entity\Usuario::class) ->findAll();
