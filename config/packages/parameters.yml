@@ -1,0 +1,6 @@
+parameters:
+  database_host:     localhost
+  database_port:     8889
+  database_name:     demo
+  database_user:     root
+  database_password: root
